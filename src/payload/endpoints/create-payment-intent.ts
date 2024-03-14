@@ -49,6 +49,7 @@ export const createPaymentIntent: PayloadHandler = async (req, res): Promise<voi
         },
       })
     }
+    console.log('stripeCustomerID', stripeCustomerID)
 
     let total = 0
 
@@ -67,7 +68,7 @@ export const createPaymentIntent: PayloadHandler = async (req, res): Promise<voi
           return null
         }
 
-        if (typeof product === 'string' || !product?.stripeProductID) {
+        if (typeof product === 'number' || !product?.stripeProductID) {
           throw new Error('No Stripe Product ID')
         }
 

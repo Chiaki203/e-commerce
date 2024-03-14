@@ -22,6 +22,15 @@ export const FOOTER = `
   }
 `
 
+// export const FOOTER = `
+//   Footer {
+//     copyright
+//     navItems {
+//       link ${LINK_FIELDS({ disableAppearance: true })}
+// 		}
+//   }
+// `
+
 export const FOOTER_QUERY = `
 query Footer {
   ${FOOTER}

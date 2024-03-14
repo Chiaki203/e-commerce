@@ -16,11 +16,12 @@ export const Orders: CollectionConfig = {
     preview: doc => `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/orders/${doc.id}`,
   },
   hooks: {
+    // afterChange: [clearUserCart],
     afterChange: [updateUserPurchases, clearUserCart],
   },
   access: {
     read: adminsOrOrderedBy,
-    update: admins,
+    update: adminsOrLoggedIn,
     create: adminsOrLoggedIn,
     delete: admins,
   },

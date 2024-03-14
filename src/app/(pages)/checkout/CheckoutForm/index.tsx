@@ -45,6 +45,7 @@ export const CheckoutForm: React.FC<{}> = () => {
           // you will be redirected to the `/cart` page before this redirect happens
           // Instead, we clear the cart in an `afterChange` hook on the `orders` collection in Payload
           try {
+            // console.log('cart items', cart.items)
             const orderReq = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/orders`, {
               method: 'POST',
               credentials: 'include',
@@ -55,15 +56,16 @@ export const CheckoutForm: React.FC<{}> = () => {
                 total: cartTotal.raw,
                 stripePaymentIntentID: paymentIntent.id,
                 items: (cart?.items || [])?.map(({ product, quantity }) => ({
-                  product: typeof product === 'string' ? product : product.id,
+                  product: typeof product === 'number' ? product : product.id,
                   quantity,
                   price:
                     typeof product === 'object'
-                      ? priceFromJSON(product.priceJSON, 1, true)
+                      ? Number(priceFromJSON(product.priceJSON, 1, true))
                       : undefined,
                 })),
               }),
             })
+            console.log('orderReq ok')
 
             if (!orderReq.ok) throw new Error(orderReq.statusText || 'Something went wrong.')
 

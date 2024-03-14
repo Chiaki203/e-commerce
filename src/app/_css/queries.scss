@@ -22,6 +22,11 @@ $breakpoint-l-width: 1440px;
     @content;
   }
 }
+@mixin mid-break2 {
+  @media (max-width: 1184px) {
+    @content;
+  }
+}
 
 @mixin large-break {
   @media (max-width: #{$breakpoint-l-width}) {
